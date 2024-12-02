@@ -4,9 +4,9 @@ import numpy as np
 import logging
 from prediction import predict
 from facedet import extract_face
-
+from flask_cors import CORS
 app = Flask(__name__)
-
+CORS(app)
 @app.route('/upload', methods=['POST'])
 def upload():
     if request.method == 'POST':
