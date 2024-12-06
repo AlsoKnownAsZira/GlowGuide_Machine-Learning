@@ -88,7 +88,7 @@ def predict(image, model_path, scaler_path, categories):
         # Load model and scaler
         model, scaler = load_model_and_scaler(model_path, scaler_path)
         if model is None or scaler is None:
-            return None, None
+            return None, None, None
         
         # Preprocess the image
         image = preprocess_image(image)

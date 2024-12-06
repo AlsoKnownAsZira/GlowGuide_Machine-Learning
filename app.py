@@ -11,10 +11,11 @@ CORS(app)
 def upload():
     if request.method == 'POST':
         # get image from request
-        img = request.files['img'].stream
+        img = request.files['img']
+        print(img)
         img = cv2.imdecode(np.fromstring(img.read(), np.uint8), cv2.IMREAD_COLOR) # Simpan gambar dari request
-        model_path = 'models\model.pkl'
-        scaler_path = 'models\scaler.pkl'
+        model_path = 'models/model.pkl'
+        scaler_path = 'models/scaler.pkl'
         categories = ["blackhead", "whitehead", "pustula", "nodule"]  # Sesuaikan dengan kategori Anda
         
         # extract face
@@ -30,3 +31,7 @@ def upload():
             })
         else:
             return jsonify({'error': 'Prediction failed'}), 500
+
+
+if __name__ == '__main__':
+    app.run(host='0.0.0.0', port=5000, debug=True, threaded=True)
