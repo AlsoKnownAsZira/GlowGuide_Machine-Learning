@@ -3,7 +3,6 @@ import cv2
 import numpy as np
 import logging
 from prediction import predict
-from facedet import extract_face
 from flask_cors import CORS
 app = Flask(__name__)
 CORS(app)
@@ -13,13 +12,10 @@ def upload():
         # get image from request
         img = request.files['img']
         print(img)
-        img = cv2.imdecode(np.fromstring(img.read(), np.uint8), cv2.IMREAD_COLOR) # Simpan gambar dari request
+        img = cv2.imdecode(np.fromstring(img.read(), np.uint8), cv2.IMREAD_COLOR)
         model_path = 'models/model.pkl'
         scaler_path = 'models/scaler.pkl'
-        categories = ["blackhead", "whitehead", "pustula", "nodule"]  # Sesuaikan dengan kategori Anda
-        
-        # extract face
-        # face = extract_face(img)
+        categories = ["blackhead", "whitehead", "pustula", "nodule"]
 
         # make prediction
         label, confidence, feat = predict(img, model_path, scaler_path, categories)
