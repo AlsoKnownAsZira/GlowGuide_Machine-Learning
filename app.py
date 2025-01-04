@@ -26,6 +26,5 @@ def upload():
         else:
             return jsonify({'error': 'Prediction failed'}), 500
 
-# Use this to ensure it runs with gunicorn in production
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=5000, debug=True, threaded=True)
